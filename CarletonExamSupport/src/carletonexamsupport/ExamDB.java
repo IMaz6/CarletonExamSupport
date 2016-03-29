@@ -5,6 +5,7 @@
  */
 package carletonexamsupport;
 
+
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -21,7 +22,7 @@ public class ExamDB {
     private Set<String> times = new TreeSet<>();
     private Set<String> courses = new TreeSet<>();
     private Set<String> sections = new TreeSet<>();
-    private Set<String> rooms = new TreeSet<>();
+    private Set<String> location = new TreeSet<>();
     
     public ExamDB(List<DataEntry> db) {
         this.db = db;
@@ -31,7 +32,7 @@ public class ExamDB {
             times.add(entry.getTime());
             courses.add(entry.getCourse());
             sections.add(entry.getSection());
-            rooms.add(entry.getRoom());
+            location.add(entry.getLocation());
         }
     }
     
@@ -44,7 +45,7 @@ public class ExamDB {
     }
 
     public Set<String> getRooms() {
-        return rooms;
+        return location;
     }
 
     public Set<String> getSection() {
@@ -56,3 +57,4 @@ public class ExamDB {
     }
     
 }
+

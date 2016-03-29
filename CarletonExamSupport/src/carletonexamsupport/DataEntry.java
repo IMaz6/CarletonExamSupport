@@ -4,27 +4,50 @@
  * and open the template in the editor.
  */
 package carletonexamsupport;
-
-import java.util.List;
-
 /**
  *
- * @author dominikschmidtlein
+ * @author aaronhill2
  */
 public class DataEntry {
     
-    private String date;
-    private String time;
-    private String course;
-    private String section;
-    private String room;
+    String department;
+    String course;
+    String section;
+    String date;
+    String   time;
+    float  duration;
+    String location;
+    int    firstRow;
+    int    lastRow;
+    int    studentCount;
+    int    firstStudent;
+    int    lastStudent;
     
-    public DataEntry(String date, String time, String course, String section, String room) {
-        this.date = date;
+    public DataEntry(String department,
+                String course,
+                String section,
+                String date,
+                String   time,
+                float  duration,
+                String location,
+                int    firstRow,
+                int    lastRow,
+                int    studentCount,
+                int    firstStudent,
+                int    lastStudent) {
+            
+        this.department = department;
         this.course = course;
-        this.time = time;
         this.section = section;
-        this.room = room;
+        this.date = date;
+        this.time = time;
+        this.duration = duration;
+        this.location = location;
+        this.firstRow = firstRow;
+        this.lastRow = lastRow;
+        this.studentCount = studentCount;
+        this.firstStudent = firstStudent;
+        this.lastStudent = lastStudent;
     }
 
     public String getCourse() {
@@ -35,8 +58,8 @@ public class DataEntry {
         return date;
     }
 
-    public String getRoom() {
-        return room;
+    public String getLocation() {
+        return location;
     }
 
     public String getSection() {
@@ -46,5 +69,6 @@ public class DataEntry {
     public String getTime() {
         return time;
     }
+    
     
 }
