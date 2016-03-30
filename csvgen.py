@@ -12,18 +12,20 @@ enrolled  = range(10, 500)
 
 
 for i in range(n):
-	print("{:<8}{:<16}{:<8}{:<16}{:<8}{:<8}{:<3}{:<13}{:<8}{:<8}{:<8}{:<8}{:<16}{:<16}".format(
-		random.choice(courses),
-		random.choice(courses) + random.choice(codes),
-		random.choice(sections),
-		"{}/{}/{}".format(random.choice([str(i).zfill(2) for i in range(12)]), random.choice([str(i).zfill(2) for i in range(30)]), random.choice([str(i).zfill(2) for i in range(15, 16)])),
-		random.choice(times),
-		random.choice(durations),
-		random.choice(locations),
-		random.randint(100, 400),
-		random.choice(["row", ""]),
-		random.randint(1, 30),
-		random.randint(1, 30),
-		random.choice(enrolled),
-		random.randint(100880000, 100899999),
-		random.randint(100880000, 100899999)))
+    line = "{:<8}{:<16}{:<8}{:<16}{:<8}{:<8}{:<3}{:<13}{:<8}{:<8}{:<8}{:<16}{:<16}".format(
+        random.choice(courses),
+        random.choice(courses) + random.choice(codes),
+        random.choice(sections),
+        "{}/{}/{}".format(random.choice([str(i).zfill(2) for i in range(12)]), random.choice([str(i).zfill(2) for i in range(30)]), random.choice([str(i).zfill(2) for i in range(15, 16)])),
+        random.choice(times),
+        random.choice(durations),
+        random.choice(locations),
+        random.randint(100, 400),
+        random.randint(1, 30),
+        random.randint(1, 30),
+        random.choice(enrolled),
+        random.randint(100880000, 100899999),
+        random.randint(100880000, 100899999))
+        
+    #print line 
+    print ",".join([s.strip() for s in line.split()])

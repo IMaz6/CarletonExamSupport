@@ -16,7 +16,8 @@ public class DataEntry {
     String date;
     String   time;
     float  duration;
-    String location;
+    String building;
+    int    roomNum;
     int    firstRow;
     int    lastRow;
     int    studentCount;
@@ -29,25 +30,27 @@ public class DataEntry {
                 String date,
                 String   time,
                 float  duration,
-                String location,
+                String building,
+                int    roomNum,
                 int    firstRow,
                 int    lastRow,
                 int    studentCount,
                 int    firstStudent,
                 int    lastStudent) {
             
-        this.department = department;
-        this.course = course;
-        this.section = section;
-        this.date = date;
-        this.time = time;
-        this.duration = duration;
-        this.location = location;
-        this.firstRow = firstRow;
-        this.lastRow = lastRow;
+        this.department   = department;
+        this.course       = course;
+        this.section      = section;
+        this.date         = date;
+        this.time         = time;
+        this.duration     = duration;
+        this.building     = building;
+        this.roomNum      = roomNum;
+        this.firstRow     = firstRow;
+        this.lastRow      = lastRow;
         this.studentCount = studentCount;
         this.firstStudent = firstStudent;
-        this.lastStudent = lastStudent;
+        this.lastStudent  = lastStudent;
     }
 
     public String getCourse() {
@@ -59,7 +62,11 @@ public class DataEntry {
     }
 
     public String getLocation() {
-        return location;
+        return building;
+    }
+
+    public String getRoomNum() {
+        return roomNum;
     }
 
     public String getSection() {
