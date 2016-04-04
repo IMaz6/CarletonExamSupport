@@ -117,5 +117,25 @@ public class DataEntry {
         return time;
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof DataEntry)) return false;
+        DataEntry dataEntry = (DataEntry) obj;
+        
+        if(!department.equals(dataEntry.department)) return false;
+        if(!course.equals(dataEntry.course)) return false;
+        if(!section.equals(dataEntry.section)) return false;
+        if(!date.equals(dataEntry.date)) return false;
+        if(!time.equals(dataEntry.time)) return false;
+        if(duration != dataEntry.duration) return false;
+        if(!building.equals(dataEntry.building)) return false;
+        if(roomNum != dataEntry.roomNum) return false;
+        if(firstRow != dataEntry.firstRow) return false;
+        if(lastRow != dataEntry.lastRow) return false;
+        if(studentCount != dataEntry.studentCount) return false;
+        if(firstStudent != dataEntry.firstStudent) return false;
+        if(lastStudent != dataEntry.lastStudent) return false;
+        return true;
+    }
     
 }
