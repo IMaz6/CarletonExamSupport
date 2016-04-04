@@ -1,24 +1,34 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+*/
 package examservice;
 import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 /**
- *
+ *This class handles the parsing of a CSV file, The CSV file is read line by line, from which data is pulled into a DataEntry type (see class),
+ *The class is meant to run by passing a file on construction, and then calling getDB to get a type ExamDB (see class). 
  * @author ihtishammazhar
  */
 public class CSVParser {
     
     File file;
+
+    /**
+     *Constructor takes in a parameter of CSV file, the assurance that this is only
+     * a CSV file is handled on the instantiating side
+     * @param csv
+     */
     public CSVParser(File csv){
         this.file = csv;
     }
     
+    /**
+     * This method reads line-by-line from CSV file (till end), and calls getEntry to fill up and return an ExamDB full of DataEntry
+     * @return ExamDB (list of DataEntry) parsed from this CSV file
+     * @throws FileNotFoundException
+     */
     public ExamDB getDB() throws FileNotFoundException{
         Scanner scan = new Scanner(file);
         ArrayList<DataEntry> dataList = new ArrayList<>();
@@ -31,7 +41,11 @@ public class CSVParser {
         return new ExamDB(dataList);
         }
     
-    
+    /**
+     * This method is called to pull a DataEntry from one line of info in the CSV file
+     * @param lineScan - The line being currently read from the CSV file is passed in
+     * @return DataEntry - get one complete DataEntry from one line of the CSV file
+     */
     public DataEntry getEntry(Scanner lineScan){
         
         lineScan.useDelimiter(",");

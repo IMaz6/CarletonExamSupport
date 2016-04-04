@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- *
+ * This class holds a List of DataEntries, this is the main database class, an object of this class can hold all information from a CSV file
  * @author dominikschmidtlein
  */
 public class ExamDB {
@@ -23,6 +23,10 @@ public class ExamDB {
     private Set<String> sections = new TreeSet<>();
     private Set<String> location = new TreeSet<>();
     
+    /**
+     *The constructor takes any list of type DataEntry and stores them into a TreeSet. So that they're organized and have no duplicates
+     * @param db
+     */
     public ExamDB(List<DataEntry> db) {
         this.db = db;
         
@@ -35,22 +39,42 @@ public class ExamDB {
         }
     }
     
+    /**
+     *Returns all the courses in the database (all courses in a CSV file)
+     * @return 
+     */
     public Set<String> getCourse() {
         return  courses;
     }
 
+    /**
+     *Returns all the Dates in the database (all dates in a CSV file)
+     * @return 
+     */
     public Set<String> getDates() {
         return dates;
     }
 
+    /**
+     *Returns all the Rooms in the database (all the Rooms in a CSV file)
+     * @return 
+     */
     public Set<String> getRooms() {
         return location;
     }
 
+    /**
+     *Returns all the Sections in the database (all the Sections in a CSV file)
+     * @return 
+     */
     public Set<String> getSection() {
         return sections;
     }
 
+    /**
+     *Returns all the Times in the database (all the Times in a CSV file)
+     * @return 
+     */
     public Set<String> getTimes() {
         return times;
     }

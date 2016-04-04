@@ -6,7 +6,7 @@
 package examservice;
 
 /**
- *
+ * Top of class - Only handles instantiating new GUI
  * @author ihtishammazhar
  */
 public class ExamService {

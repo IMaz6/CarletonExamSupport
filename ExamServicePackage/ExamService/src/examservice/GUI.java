@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.awt.Image; 
 /**
- *
+ * This class is the main GUI for the program.
  * @author ihtishammazhar
  */
 public class GUI extends javax.swing.JFrame {
@@ -24,6 +24,10 @@ public class GUI extends javax.swing.JFrame {
     DefaultListModel<String> sectionListmodel;
     DefaultComboBoxModel<String> timeListmodel;
     DefaultComboBoxModel<String> locationListmodel;
+
+    /**
+     *This section is particularly complex to read since it is all the code for the user interface
+     */
     public GUI() {
         courseListmodel = new DefaultListModel<>();
         courseListmodel.addElement("");
@@ -286,6 +290,10 @@ public class GUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This method ensures that only CSV files are accepted while opening
+     */
+    
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
         JFileChooser jfc = new JFileChooser(); 
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Comma Separated Value", "csv");
@@ -344,6 +352,10 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    
+    /**
+     * This method ensures that all fields are unchangeable unless the appropriate check-boxes have been selected 
+     */
     private void updateDisabling() {
         boolean time = false, date = false, location = false, course = false, section = false;
         if(jCheckBox1.isSelected()) {
