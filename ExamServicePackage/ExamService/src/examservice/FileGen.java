@@ -20,7 +20,7 @@ public class FileGen {
     public FileGen(ExamDB db){
         this.db = db;
 }
-    public void getMasterSeatingPlan(){
+    public void getMasterSeatingPlan(String date, String time){
         try{
         File output = new File("MasterSeatingPlan.txt");
         if (!output.exists()) {
