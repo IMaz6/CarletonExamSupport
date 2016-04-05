@@ -15,34 +15,25 @@ import java.util.List;
  */
 public class FileGen {
 
-    List<DataEntry> db;
+    ExamDB db;
     
-    public FileGen(List<DataEntry> db){
+    public FileGen(ExamDB db){
         this.db = db;
 }
-    public void getMasterSeatingPlan(String date, String time){
+    public void getMasterSeatingPlan(){
         try{
-        File output = new File("master.csv");
+        File output = new File("MasterSeatingPlan.txt");
         if (!output.exists()) {
 	     output.createNewFile();
 	  }
         FileWriter fw = new FileWriter(output);
         BufferedWriter b = new BufferedWriter(fw);
-        b.write(date+" "+time+"\n");
-        b.write("Course,Same As,Section,Duration,Location,Enrolled,Rows,Room,Student Number\n");
-        for(DataEntry e : db){
-        	if(e.getDate().equals(date) && e.getTime().equals(time)){
-        		b.write(
-        	 e.getCourse()+","
-        	+","	//same as
-        	+e.getSection()+","
-        	+e.getDuration()+","
-        	+e.getLocation()+","
-        	+e.getStudentCount()+","
-        	+e.getRow()+","
-        	+e.getRoomNum()+","
-        	+e.getFirstStudent()+"-"+e.getLastStudent()+"\n");
-        	}
+        List<DataEntry> de = db.getList();
+        b.write(getSpace(10) + "Master Seating Plan");
+        b.newLine();
+        for(DataEntry e : de){
+            b.write(e.getCourse() + getSpace(3) + e.getSection() + getSpace(3) + e.getDate() + getSpace(7) + e.getTime() + getSpace(4) + e.getLocation() + getSpace(6) + e.getRoomNum() + getSpace(5) + e.getRows() + e.getStudent());
+            b.newLine();
         }
         b.close();
         }
@@ -51,15 +42,72 @@ public class FileGen {
     }
     
     public void getSeatingPlan(){
+        try{
+        File output = new File("SeatingPlan.txt");
+        if (!output.exists()) {
+	     output.createNewFile();
+	  }
+        FileWriter fw = new FileWriter(output);
+        BufferedWriter b = new BufferedWriter(fw);
+        List<DataEntry> de = db.getList();
+        b.write(getSpace(10) + "Seating Plan");
+        b.newLine();
+        for(DataEntry e : de){
+            b.write(e.getCourse() + getSpace(3) + e.getSection() + getSpace(3) + e.getDate() + getSpace(7) + e.getTime() + getSpace(4) + e.getLocation());
+            b.newLine();
+        }
+        b.close();
+        }
+        catch(IOException e){}
     }
     
     public void getExamSignInSheet(){
+        try{
+        File output = new File("ExamSignInSheet.txt");
+        if (!output.exists()) {
+	     output.createNewFile();
+	  }
+        FileWriter fw = new FileWriter(output);
+        BufferedWriter b = new BufferedWriter(fw);
+        List<DataEntry> de = db.getList();
+        b.write(getSpace(10) + "Exam Sign in Sheet");
+        b.newLine();
+        b.newLine();
+        b.write("Name" + getSpace(25) + "Student Number" + getSpace(25) + "Signature");
+        b.close();
+        }
+        catch(IOException e){}
     }
     
     public void getEnvelope(){
+        try{
+        File output = new File("Envelope.txt");
+        if (!output.exists()) {
+	     output.createNewFile();
+	  }
+        FileWriter fw = new FileWriter(output);
+        BufferedWriter b = new BufferedWriter(fw);
+        List<DataEntry> de = db.getList();
+     
+        for(DataEntry e : de){
+            b.write(e.getCourse() + getSpace(3) + e.getSection() + getSpace(3) + e.getTime() + getSpace(4));
+            b.newLine();
+            b.write(e.getLocation() + getSpace(3) + e.getDate());
+            b.newLine();
+            b.newLine();
+        }
+        b.close();
+        }
+        catch(IOException e){}
+        
     }
     
-    public void insertSpace(int n){
+    public String getSpace(int n){
+        String s = "";
+        for(int i=0; i < n; i++){
+            s += " ";
+        }
+        return s;
     }
     
     }
