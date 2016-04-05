@@ -117,6 +117,31 @@ public class DataEntry {
         return time;
     }
     
+    public float getDuration(){
+    	return duration;
+    }
+    
+    public String getBuilding(){
+    	return building;
+    }
+    
+    public String getRow(){
+    	String ret = ""+firstRow+"-"+lastRow;
+    	return ret;
+    }
+    
+    public int getStudentCount(){
+    	return studentCount;
+    }
+    
+    public int getFirstStudent(){
+    	return firstStudent;
+    }
+    
+    public int getLastStudent(){
+    	return lastStudent;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof DataEntry)) return false;

@@ -27,6 +27,7 @@ public class ExamDB {
      *The constructor takes any list of type DataEntry and stores them into a TreeSet. So that they're organized and have no duplicates
      * @param db
      */
+    
     public ExamDB(List<DataEntry> db) {
         this.db = db;
         
@@ -37,6 +38,13 @@ public class ExamDB {
             sections.add(entry.getSection());
             location.add(entry.getLocation());
         }
+    }
+    /**
+     *Returns all the the underlying database file
+     * @return 
+     */
+    public List<DataEntry> getDB() {
+        return  db;
     }
     
     /**

@@ -8,26 +8,42 @@ import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 /**
  * This class handles creation of output files.
  * @author Ihtisham
  */
 public class FileGen {
 
-    ExamDB db;
+    List<DataEntry> db;
     
-    public FileGen(ExamDB db){
+    public FileGen(List<DataEntry> db){
         this.db = db;
 }
-    public void getMasterSeatingPlan(){
+    public void getMasterSeatingPlan(String date, String time){
         try{
-        File output = new File("aaron is gay.txt");
+        File output = new File("master.csv");
         if (!output.exists()) {
 	     output.createNewFile();
 	  }
         FileWriter fw = new FileWriter(output);
         BufferedWriter b = new BufferedWriter(fw);
-        b.write("3============================D");
+        b.write(date+" "+time+"\n");
+        b.write("Course,Same As,Section,Duration,Location,Enrolled,Rows,Room,Student Number\n");
+        for(DataEntry e : db){
+        	if(e.getDate().equals(date) && e.getTime().equals(time)){
+        		b.write(
+        	 e.getCourse()+","
+        	+","	//same as
+        	+e.getSection()+","
+        	+e.getDuration()+","
+        	+e.getLocation()+","
+        	+e.getStudentCount()+","
+        	+e.getRow()+","
+        	+e.getRoomNum()+","
+        	+e.getFirstStudent()+"-"+e.getLastStudent()+"\n");
+        	}
+        }
         b.close();
         }
         catch(IOException e){}

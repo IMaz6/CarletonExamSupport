@@ -42,7 +42,7 @@ public class GUI extends javax.swing.JFrame {
         this.setTitle("Carleton Exam Services");
         this.setSize(400,470);
         this.setResizable(false);
-        this.setIconImage(new ImageIcon(getClass().getResource("frameLogo.png")).getImage()); 
+        //this.setIconImage(new ImageIcon(getClass().getResource("frameLogo.png")).getImage()); 
     }
 
     /**
@@ -302,7 +302,7 @@ public class GUI extends javax.swing.JFrame {
             File selectedFile = jfc.getSelectedFile();
             CSVParser parser = new CSVParser(selectedFile);
             try{
-            ExamDB db = parser.getDB();
+            db = parser.getDB();
             Set s = db.getCourse();
             Iterator it = s.iterator();
             while(it.hasNext()){
@@ -328,9 +328,33 @@ public class GUI extends javax.swing.JFrame {
         }         // TODO add your handling code here:
     }//GEN-LAST:event_openFileButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FileGen f = new FileGen(new ExamDB(new ArrayList()));
-        f.getMasterSeatingPlan();
+    @SuppressWarnings("deprecation")
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	if(db == null) {return;}	//no CSV selected
+        FileGen f = new FileGen(db.getDB());
+        Date d = jXDatePicker1.getDate();
+        String date = "";
+        if(d!=null){
+        	date = ""+String.format("%02d", d.getMonth()+1)
+        	+"/"+String.format("%02d", d.getDate())
+        	+"/"+String.format("%02d", (d.getYear()-100));
+        }
+        String time = (String) jComboBox1.getSelectedItem() ;
+        String location = (String) jComboBox2.getSelectedItem();
+        String section = (String) sectionList.getSelectedValue() ;
+        String course = (String) courseList.getSelectedValue();
+        if(jCheckBox1.isSelected()) {
+        	f.getSeatingPlan();
+        }
+        if(jCheckBox2.isSelected() && !date.equals("") && !time.equals("")) {
+        	f.getMasterSeatingPlan(date, time);
+        }
+        if(jCheckBox3.isSelected()) {
+        	f.getExamSignInSheet();
+        }
+        if(jCheckBox4.isSelected()){
+        	f.getEnvelope();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -439,5 +463,6 @@ public class GUI extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private javax.swing.JButton openFileButton;
     private javax.swing.JList sectionList;
+    private ExamDB db;
     // End of variables declaration//GEN-END:variables
 }
