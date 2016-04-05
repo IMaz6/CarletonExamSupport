@@ -37,7 +37,9 @@ public class CSVParser {
             Scanner lineScan = new Scanner(line);
             DataEntry d = getEntry(lineScan);
             dataList.add(d);
+            lineScan.close();
            }
+        scan.close();
         return new ExamDB(dataList);
         }
     

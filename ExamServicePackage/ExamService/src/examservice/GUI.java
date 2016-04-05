@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//JXDatePicker -> https://java.net/downloads/swingx/releases/swingx-all-1.6.3.jar
-//
 package examservice;
 
 import javax.swing.*;
@@ -12,9 +10,7 @@ import java.io.File;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.awt.Image;
-//import org.apache.poi.hssf.usermodel.*;
-
+import java.awt.Image; 
 /**
  * This class is the main GUI for the program.
  * @author ihtishammazhar
@@ -105,7 +101,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel1.setText("Date");
 
         jButton1.setText("Generate");
-        jButton1.setEnabled(false);
         jButton1.setToolTipText("Click this button to generate the selected file(s)");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +168,6 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jCheckBox1.setText("Seating Plan");
-        jCheckBox1.setEnabled(false);
         jCheckBox1.setToolTipText("Check-box each file that needs to be generated");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +176,6 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jCheckBox2.setText("Master Seating Plan");
-        jCheckBox2.setEnabled(false);
         jCheckBox2.setToolTipText("Check-box each file that needs to be generated");
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +184,6 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jCheckBox3.setText("Exam Sign in Sheet");
-        jCheckBox3.setEnabled(false);
         jCheckBox3.setToolTipText("Check-box each file that needs to be generated");
         jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +192,6 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jCheckBox4.setText("Envelope");
-        jCheckBox4.setEnabled(false);
         jCheckBox4.setToolTipText("Check-box each file that needs to be generated");
         jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +203,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel2.setToolTipText("Select which files are needed to be generated from below");
 
         courseList.setModel(courseListmodel);
-        courseList.setEnabled(false);
         courseList.setToolTipText("Select the Course and Section here");
         courseList.setSize(120,130);
         jScrollPane2.setViewportView(courseList);
@@ -222,7 +212,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setText("Section:");
 
         sectionList.setModel(sectionListmodel);
-        sectionList.setEnabled(false);
         sectionList.setToolTipText("Select the Course and Section here");
         sectionList.setSize(60,130);
         jScrollPane3.setViewportView(sectionList);
@@ -302,7 +291,7 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * This method ensures that only CSV files are accepted while opening
+     * This method ensures that only CSV files are accepted while opening and fills in the appropriate forms
      */
     
     private void openFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFileButtonActionPerformed
@@ -313,7 +302,7 @@ public class GUI extends javax.swing.JFrame {
             File selectedFile = jfc.getSelectedFile();
             CSVParser parser = new CSVParser(selectedFile);
             try{
-            db = parser.getDB();
+            ExamDB db = parser.getDB();
             Set s = db.getCourse();
             Iterator it = s.iterator();
             while(it.hasNext()){
@@ -334,32 +323,14 @@ public class GUI extends javax.swing.JFrame {
             while(it.hasNext()){
                 sectionListmodel.addElement((String) it.next());
             }
-            jCheckBox1.setEnabled(true);
-            jCheckBox2.setEnabled(true);
-            jCheckBox3.setEnabled(true);
-            jCheckBox4.setEnabled(true);
             }
             catch(FileNotFoundException e){}
         }         // TODO add your handling code here:
     }//GEN-LAST:event_openFileButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	if(jCheckBox1.isSelected()){
-    		generateSeatingPlan();
-    	}
-    	
-    	if(jCheckBox2.isSelected()){
-    		generateMasterSeatingPlan();
-    	}
-    	
-    	if(jCheckBox3.isSelected()){
-    		generateSignSheet();
-    	}
-    	
-    	if(jCheckBox4.isSelected()){
-    		generateEnvelope();
-    	}
-        // TODO add your handling code here:
+        FileGen f = new FileGen(new ExamDB(new ArrayList()));
+        f.getMasterSeatingPlan();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -379,6 +350,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     
@@ -400,49 +372,15 @@ public class GUI extends javax.swing.JFrame {
             course = true;
             section = true;
         }
-        courseList.setEnabled(course);
         sectionList.setEnabled(section);
+        courseList.setEnabled(course);
         jXDatePicker1.setEnabled(date);
         jComboBox1.setEnabled(time);
         jComboBox2.setEnabled(location);
-        jButton1.setEnabled(date || section);
     }
     /**
      * @param args the command line arguments
      */
-    private void generateMasterSeatingPlan(){
-    	/*String[] titles = {"Course","Section","Same As","Duration","Location","Rows","Enrl","Names","Instructor", "Booklet"}; 
-    	HSSFWorkbook wb = new HSSFWorkbook();
-    	HSSFSheet sheet = wb.createSheet();
-    	HSSFRow r = null;
-    	HSSFCell c = null;
-    	for(int rowNum = 0; rowNum<titles.length; rowNum++){
-    		r =sheet.createRow(rowNum);
-    		for(int colNum = 0; colNum<db.getCourse().size()+1;colNum++){
-    			HSSFCell cell = r.createCell(colNum);
-    			if(colNum==0){
-    				cell.setCellValue(titles[rowNum]);
-    			} else {
-    				cell.setCellValue(""+db.getCourse());
-    			}
-    			
-    		}
-    	}*/
-    	// TODO write function to generate doc/excel file
-    }
-    
-    private void generateSeatingPlan(){
-    	// TODO write function to generate doc/excel file
-    }
-    
-    private void generateSignSheet(){
-    	// TODO write function to generate doc/excel file
-    }
-    
-    private void generateEnvelope(){
-    	// TODO write function to generate doc/excel file
-    }
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -501,6 +439,5 @@ public class GUI extends javax.swing.JFrame {
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     private javax.swing.JButton openFileButton;
     private javax.swing.JList sectionList;
-    private ExamDB db;
     // End of variables declaration//GEN-END:variables
 }
