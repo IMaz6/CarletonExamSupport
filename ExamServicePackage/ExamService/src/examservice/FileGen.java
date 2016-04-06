@@ -32,7 +32,7 @@ public class FileGen {
         b.write(getSpace(10) + "Master Seating Plan");
         b.newLine();
         for(DataEntry e : de){
-            b.write(e.getCourse() + getSpace(3) + e.getSection() + getSpace(3) + e.getDate() + getSpace(7) + e.getTime() + getSpace(4) + e.getLocation() + getSpace(6) + e.getRoomNum() + getSpace(5) + e.getRows() + e.getStudent());
+            b.write(e.getCourse() + getSpace(3) + e.getSection() + getSpace(3) + e.getDate() + getSpace(7) + e.getTime() + getSpace(4) + e.getDuration() + getSpace(5) + e.getLocation() + getSpace(3) + e.getBuilding() + getSpace(6) + e.getRoomNum() + getSpace(5) + e.getRow() + e.getStudentCount() + getSpace(5) + e.getFirstStudent() + getSpace(3) + e.getLastStudent());
             b.newLine();
         }
         b.close();

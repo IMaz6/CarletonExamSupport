@@ -43,7 +43,7 @@ public class ExamDB {
      *Returns all the the underlying database file
      * @return 
      */
-    public List<DataEntry> getDB() {
+    public List<DataEntry> getList() {
         return  db;
     }
     

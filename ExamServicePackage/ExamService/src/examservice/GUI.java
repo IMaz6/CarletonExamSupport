@@ -331,7 +331,7 @@ public class GUI extends javax.swing.JFrame {
     @SuppressWarnings("deprecation")
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	if(db == null) {return;}	//no CSV selected
-        FileGen f = new FileGen(db.getDB());
+        FileGen f = new FileGen(db);
         Date d = jXDatePicker1.getDate();
         String date = "";
         if(d!=null){
